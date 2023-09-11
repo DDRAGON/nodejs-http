@@ -3,9 +3,8 @@ const http = require('node:http');
 const pug = require('pug');
 const server = http
   .createServer((req, res) => {
-    const now = new Date();
     console.info(
-      `[${now}] Reqested by ${req.socket.remoteAddress}`
+      `Reqested by ${req.socket.remoteAddress}`
     );
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8'
@@ -54,7 +53,7 @@ const server = http
           })
           .on('end', () => {
             const decoded = decodeURIComponent(rawData);
-            console.info(`[${now}] 投稿: ${decoded}`);
+            console.info(`投稿: ${decoded}`);
             const answer = new URLSearchParams(rawData);
             res.write(`<h1>${answer.get('name')}さんは、${answer.get('favorite')}に投票しました。</h1>`);
             res.end();
@@ -68,9 +67,9 @@ const server = http
         break;
     }
   }).on('error', e => {
-    console.error(`[${new Date()}] Server Error`, e)
+    console.error(`Server Error`, e)
   }).on('clientError', e => {
-    console.error(`[${new Date()}] Client Error`, e)
+    console.error(`Client Error`, e)
   })
 
 const port = process.env.PORT || 8000;
