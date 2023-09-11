@@ -73,7 +73,7 @@ const server = http
     console.error(`[${new Date()}] Client Error`, e)
   })
 
-const port = 8000;
+const port = process.env.PORT || 8000;
 server.listen(port, () => {
   console.log(`サーバーが起動していますポート ${port} 番で。`);
 });
